@@ -5,7 +5,8 @@ import Float "mo:base/Float";
 actor DBank {
   stable var currentValue : Float = 300;
   currentValue := 300;
-  stable var startTime = Time.now();
+  //stable var startTime = Time.now();
+  var startTime = Time.now();
   Debug.print(debug_show(startTime));
 
   let id = 23243545543;
@@ -24,6 +25,13 @@ actor DBank {
     } else {
       Debug.print("Amount is too big");
     }
+  };
+
+  public func compound() {
+    let currentTime = Time.now();
+    let timeElapsedNSec = currentTime - startTime;
+    let timeElapsedSec = timeElapsedNSec / 1000000000;
+    currentValue := currentValue * (1.01 ** Float.fromInt(timeElapsedSec));
   };
 
   public query func checkBalance(): async Float {

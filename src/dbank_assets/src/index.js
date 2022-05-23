@@ -24,6 +24,8 @@ document.querySelector('form').addEventListener('submit', async (e) => {
     await dbank.withdrawl(parseFloat(outputAmount))
   }
 
+  await dbank.compound();
+
   printBalance();
 
   inputAdd.value = '';
